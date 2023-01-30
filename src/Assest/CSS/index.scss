@@ -116,6 +116,15 @@ a {
   border-color: var(--theme-border-color19);
 }
 
+.btn-secondary {
+  color: var(--theme-font-color9);
+  background-color: var(--theme-fill-color6);
+  border-color: var(--theme-border-color12);
+  font-weight: bold;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}
+
 .form-control:focus {
   border: 0;
   box-shadow: none !important;

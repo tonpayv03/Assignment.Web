@@ -14,6 +14,7 @@ import './Assest/CSS/mui-validation.scss';
 const Main = React.lazy(() => import("./Pages/Main/Route"));
 const Register = React.lazy(() => import("./Pages/Register/Route"));
 const Dashboard = React.lazy(() => import("./Pages/Dashboard/Route"));
+const Fruit = React.lazy(() => import("./Pages/Fruit/Route"));
 
 
 class App extends React.Component {
@@ -35,6 +36,7 @@ class App extends React.Component {
             <Route exact path="/" component={Main} /> 
             <Route path="/Register" component={Register} />
             <Route path="/Dashboard" component={Dashboard} />
+            <Route path="/Fruit" component={Fruit} />
           </Switch>                                  
       </Suspense>
     );

@@ -18,5 +18,6 @@ export class OrderDetails {
 
 export const OrderPostType = {
     POST: 'POST',
-    GET: 'GET'
+    GET: 'GET',
+    POSTFROMDATA: 'POSTFROMDATA'
 }

@@ -25,6 +25,10 @@ export class APIHeadQuarters {
                 } else if (orderDetails.requestMethod == OrderPostType.GET) {
                     console.log('GET')
                     res = await axios.get(orderDetails.requestUrl, { withCredentials: true, validateStatus: false });
+                } else if (orderDetails.requestMethod == OrderPostType.POSTFROMDATA) {
+
+                    console.log('POSTFROMDATA', orderDetails.requestJson)
+                    res = await axios.post(orderDetails.requestUrl, orderDetails.requestJson, { withCredentials: true, validateStatus: false, headers: { 'content-type': 'multipart/form-data' } });
                 }
                 console.log('response', res);
             } catch (error) {

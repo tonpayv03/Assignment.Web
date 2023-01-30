@@ -64,6 +64,14 @@ class Sidebar extends Component {
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a data-bs-toggle="collapse" href="#pttMenu" role="button" aria-expanded="false" aria-controls="pttMenu">PTT</a>
+                            <ul className="collapse show" id='pttMenu'>
+                                <li className={this.GetCleanCurrentSubPathURL()?.toLowerCase() == "/Fruit".toLowerCase() ? "active" : ""}>
+                                    <Link to="/Fruit">Fruit</Link>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </React.Fragment >
