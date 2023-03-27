@@ -83,6 +83,17 @@
   overflow: auto;
 }
 
+.add-fruit.form-control[type=file] {
+  padding: 9px 5px 5px 15px !important;
+  height: 48px !important;
+}
+
+@media (min-width: 992px) {
+  .modal-lg, .modal-xl {
+    --bs-modal-width: 1200px !important;
+  }
+}
+
 @media (max-width: 768px) {
   .text-left {
     justify-content: start !important;

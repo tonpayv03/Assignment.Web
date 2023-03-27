@@ -13,6 +13,7 @@ import history from '../../Helper/history';
 import LayoutMain from "../../Components/Layout/LayoutMain";
 import DataTable from 'react-data-table-component';
 import { Button, Card, Col, Form, Row } from 'react-bootstrap';
+import AddFruitModal from './Components/AddFruitModal'
 //#endregion
 
 const Fruit = () => {
@@ -23,7 +24,9 @@ const Fruit = () => {
 
     const [data, setData] = useState([]);
     const [filterData, setFilterData] = useState([]);
-
+    
+    const [isShowModal, setIsShowModal] = useState(false);
+    
     const columns = [
         {
             name: 'ชื่อผลไม้',
@@ -37,19 +40,33 @@ const Fruit = () => {
     ];
 
     useEffect(() => {
-        console.log('component mounted')
+        console.log('useEffect of isShowModal start')
         let mounted = true;
-        FruitService.ListAllFruit().then(async (res) => {
-            if (mounted) {
+
+        if (!isShowModal) {
+            console.log('call onListAllFruit by isShowModal == false')
+            onListAllFruit();
+        }
+
+        console.log('useEffect of isShowModal end')
+        return () => mounted = false;
+    }, [isShowModal])
+
+    const onListAllFruit = () => {
+
+        let process = true;
+
+        FruitService.ListAllFruit().then((res) => {
+            if (process) {
                 if (res?.isSuccess) {
                     setData(res.fruits);
                     setFilterData(res.fruits);
                 }
             }
-        });
 
-        return () => mounted = false;
-    }, [])
+            process = false
+        });
+    }
 
     const onSearchChange = () => {
         let text = !!searchTextInputRef.current.value ? searchTextInputRef.current.value.toLowerCase() : '';
@@ -88,13 +105,16 @@ const Fruit = () => {
                                             <h2>ผลไม้</h2>
                                             <hr className="mb-4 mt-4"></hr>
                                             <Form className='float-end'>
-                                                <Button className='float-end mb-2' onClick={() => { thisHistory.push("/Fruit/Add") }} >เพิ่มผลไม้</Button>
+                                                {/* <Button className='float-end mb-2' onClick={() => { thisHistory.push("/Fruit/Add") }} >เพิ่มผลไม้</Button> */}
+                                                <Button className='float-end mb-2' onClick={() => setIsShowModal(true) } >เพิ่มผลไม้</Button>
                                                 <Form.Control as="input" className='disabled-valid-style' width={150}
                                                     ref={searchTextInputRef} maxLength={50} required placeholder="Search here"
                                                     onChange={onSearchChange} />
                                             </Form>
 
                                             <DataTable className='dataTables_wrapper' columns={columns} data={filterData} customStyles={customStyles}  />
+
+                                            <AddFruitModal show={isShowModal} handleClose={() => setIsShowModal(false)} />
                                         </Card.Body>
                                     </Card>
                                 </div>
